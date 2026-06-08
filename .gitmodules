@@ -1,0 +1,3 @@
+[submodule "chili3d"]
+	path = chili3d
+	url = https://github.com/xiangechen/chili3d

@@ -1,23 +1,22 @@
 {
-    "name": "chili3d",
+    "name": "@chili3d/mcp",
     "version": "0.7.0-beta",
-    "description": "",
     "documentVersion": "0.7.1",
-    "author": "仙阁",
+    "description": "Headless MCP server for Chili3D — AI-driven, editable parametric CAD generation over a shared OCCT geometry core",
     "type": "module",
+    "main": "src/index.ts",
+    "bin": {
+        "chili3d-mcp": "dist/server.mjs"
+    },
+    "workspaces": [
+        "chili3d/packages/*"
+    ],
     "scripts": {
-        "build": "rspack build",
-        "build:wasm": "cd cpp && cmake --preset release && cmake --build --preset release",
-        "build:types": "node scripts/generate_types.mjs",
-        "check": "biome check --write",
-        "dev": "rspack dev",
-        "format": "biome check --write . && npx clang-format --style=Webkit --sort-includes -i ./cpp/src/**",
-        "preview": "rspack preview",
-        "release": "node scripts/release.mjs",
-        "setup:wasm": "node scripts/setup_wasm_deps.mjs",
-        "test": "rstest",
-        "test:wasm": "rstest --config=rstest.wasm.config.ts",
-        "testc": "rstest --coverage"
+        "build": "esbuild src/server.ts --bundle --platform=node --format=esm --outfile=dist/server.mjs --external:@modelcontextprotocol/* --external:zod --external:ws",
+        "start": "node dist/server.mjs",
+        "bridge": "tsx scripts/bridge.ts",
+        "demo": "esbuild scripts/demo-loop.ts --bundle --platform=node --format=esm --outfile=dist/demo.mjs --external:@modelcontextprotocol/* --external:zod && node dist/demo.mjs",
+        "test": "rstest"
     },
     "simple-git-hooks": {
         "pre-commit": "npx lint-staged"
@@ -25,31 +24,23 @@
     "lint-staged": {
         "*.{ts,js,css,json,mjs}": [
             "biome check --write"
-        ],
-        "*.{c,h,cxx,hxx,cpp,hpp}": [
-            "clang-format --style=Webkit --sort-includes -i"
         ]
     },
-    "workspaces": [
-        "packages/*"
-    ],
     "devDependencies": {
         "@biomejs/biome": "^2.4.15",
-        "@rspack/cli": "^2.0.3",
-        "@rspack/core": "^2.0.3",
-        "@rspack/dev-server": "^2.0.0",
+        "@chili3d/app": "*",
+        "@chili3d/core": "*",
+        "@chili3d/wasm": "*",
         "@rstest/core": "^0.10.0",
         "@rstest/coverage-istanbul": "^0.10.0",
-        "clang-format": "^1.8.0",
-        "happy-dom": "^20.9.0",
+        "@types/ws": "^8.18.1",
+        "esbuild": "^0.28.0",
         "lint-staged": "^17.0.5",
-        "simple-git-hooks": "2.13.1",
-        "ts-checker-rspack-plugin": "^1.3.0",
-        "typescript": "^6.0.3",
-        "typescript-plugin-css-modules": "^5.2.0"
+        "tsx": "^4.22.3"
     },
     "dependencies": {
-        "@types/jszip": "^3.4.0",
-        "jszip": "^3.10.1"
+        "@modelcontextprotocol/sdk": "^1.29.0",
+        "ws": "^8.21.0",
+        "zod": "^4.4.3"
     }
 }
