@@ -22,7 +22,7 @@ export default defineConfig({
                 new DefinePlugin({
                     __APP_VERSION__: JSON.stringify(packages.version),
                     __DOCUMENT_VERSION__: JSON.stringify(packages.documentVersion),
-                    __IS_PRODUCTION__: JSON.stringify(process.env.NODE_ENV === "production"),
+                    __IS_PRODUCTION__: JSON.stringify(process.env["NODE_ENV"] === "production"),
                 }),
             ],
         },

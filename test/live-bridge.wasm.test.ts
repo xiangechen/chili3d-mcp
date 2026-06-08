@@ -61,7 +61,7 @@ describe("live bridge round-trip (controller <-> bridge <-> browser stand-in)", 
 
     beforeAll(async () => {
         await initHeadlessWasm(WASM);
-        const app = createHeadlessApplication();
+        const app = createHeadlessApplication() as IApplication;
         const document = await app.newDocument("live-test");
         wss = startBridge(PORT);
         browser = new WebSocket(URL);

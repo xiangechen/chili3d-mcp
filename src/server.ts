@@ -30,7 +30,7 @@ Logger.debug = toStderr;
 
 async function main() {
     // The OCCT .wasm ships next to @chili3d/wasm; load its bytes for Node.
-    const wasmPath = fileURLToPath(new URL("chili3d/packages/wasm/lib/chili-wasm.wasm", import.meta.url));
+    const wasmPath = fileURLToPath(new URL("../chili3d/packages/wasm/lib/chili-wasm.wasm", import.meta.url));
     await initHeadlessWasm(readFileSync(wasmPath));
 
     const server = createServer();

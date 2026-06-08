@@ -16,5 +16,11 @@
         "plugins": [{ "name": "typescript-plugin-css-modules" }],
         "types": ["@rstest/core/globals"]
     },
-    "exclude": ["chili3d/packages/chili-occ/occ-wasm", "chili3d/packages/chili-wasm/lib"]
+    "exclude": [
+        "chili3d/packages/chili-occ/occ-wasm",
+        "chili3d/packages/chili-wasm/lib",
+        "chili3d/rspack.config.ts",
+        "chili3d/rstest.config.ts",
+        "chili3d/plugins"
+    ]
 }

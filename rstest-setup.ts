@@ -22,3 +22,5 @@ if (typeof (Promise as any).try !== "function") {
     (Promise as any).try = (fn: (...args: any[]) => any, ...args: any[]) =>
         new Promise((resolve) => resolve(fn(...args)));
 }
+
+export {};
