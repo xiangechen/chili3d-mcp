@@ -1,0 +1,50 @@
+{
+    "name": "@chili3d/mcp",
+    "version": "0.1.0",
+    "description": "MCP server that lets an AI drive the Chili3D web app in a real browser",
+    "license": "AGPL-3.0",
+    "type": "module",
+    "bin": {
+        "chili3d-mcp": "bin/chili3d-mcp.mjs"
+    },
+    "files": [
+        "bin",
+        "src",
+        "README.md",
+        "LICENSE"
+    ],
+    "engines": {
+        "node": ">=20"
+    },
+    "keywords": [
+        "mcp",
+        "model-context-protocol",
+        "cad",
+        "chili3d",
+        "browser"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/xiangechen/chili3d-mcp.git"
+    },
+    "homepage": "https://github.com/xiangechen/chili3d-mcp#readme",
+    "bugs": "https://github.com/xiangechen/chili3d-mcp/issues",
+    "scripts": {
+        "build": "node -e \"require('node:fs').mkdirSync('dist',{recursive:true})\" && npm pack --pack-destination dist",
+        "test": "node test/smoke.mjs && node test/mcp.mjs",
+        "test:browser": "node test/browser.mjs",
+        "check": "biome check --write .",
+        "install:local": "npm run build && npm i -g ./dist/chili3d-mcp-0.1.0.tgz",
+        "prepublishOnly": "npm test"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.29.0",
+        "ws": "^8.21.0"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.4.15"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
